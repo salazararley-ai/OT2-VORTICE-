@@ -3,356 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OT — Vórtice E&C SAS</title>
+<title>Preview PDF — Vórtice E&C SAS</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#0f2138; --cyan:#00b8d9; --light:#f0f7fa;
-  --border:#cce0ea; --text:#1a2e3d; --muted:#3d6070;
-  --green:#00c878; --r:8px;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #ccc; font-family: 'Barlow', sans-serif; padding: 24px; display: flex; justify-content: center; }
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  font-size: 11pt;
+  color: #1a2e3d;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--light);font-family:'Barlow',sans-serif;color:var(--text);font-size:16px;}
 
 /* HEADER */
-.hdr{background:var(--navy);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,.3);}
-.hdr-brand{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:1px;}
-.hdr-brand span{color:var(--cyan);}
-.hdr-sub{font-size:10px;color:var(--muted);}
-.hdr-ot{text-align:right;}
-.hdr-ot-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.hdr-ot-num{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);}
-.progress-bar{background:#1a3352;height:3px;}
-.progress-fill{height:100%;background:linear-gradient(90deg,#0097b2,var(--cyan));transition:width .3s;width:0%;}
+.hdr {
+  background: #0f2138;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26pt;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.brand-name span { color: #00b8d9; }
+.brand-sub { font-size: 9pt; color: #6b8fa3; margin-top: 3px; }
+.brand-contact { font-size: 8.5pt; color: #4a8aa0; margin-top: 2px; }
+.ot-box {
+  background: #00b8d9;
+  border-radius: 6px;
+  padding: 8px 16px;
+  text-align: center;
+  min-width: 80px;
+}
+.ot-lbl { font-size: 8pt; color: #0f2138; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.ot-num { font-family: 'Barlow Condensed', sans-serif; font-size: 28pt; font-weight: 700; color: #0f2138; line-height: 1; }
+.stripe { background: #00b8d9; height: 4px; }
 
-/* MAIN */
-.main{max-width:600px;margin:0 auto;padding:12px 12px 80px;}
+/* BODY */
+.body { padding: 12px 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
 
-/* CARD */
-.card{background:#fff;border-radius:var(--r);margin-bottom:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,33,56,.07);}
-.card-head{background:var(--navy);padding:8px 12px;display:flex;align-items:center;gap:8px;}
-.card-head-icon{font-size:13px;}
-.card-head-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:.5px;}
-.card-body{padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
+/* SECTION */
+.sec { border: 1.5px solid #cce0ea; border-radius: 5px; overflow: hidden; }
+.sec-hdr { background: #0f2138; padding: 6px 10px; }
+.sec-hdr-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13pt; font-weight: 600; color: #00b8d9; text-transform: uppercase; letter-spacing: .5px; }
+.sec-body { padding: 8px 10px; }
 
-/* GRID */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;}
+/* GRIDS */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
 
 /* FIELD */
-.f{display:flex;flex-direction:column;gap:3px;}
-.f label{font-size:12px;font-weight:600;color:#4a6a7a;text-transform:uppercase;letter-spacing:.6px;}
-.f input,.f select,.f textarea{background:var(--light);border:1.5px solid var(--border);border-radius:6px;padding:11px 12px;font-family:'Barlow',sans-serif;font-size:16px;color:var(--text);width:100%;-webkit-appearance:none;transition:border-color .15s;}
-.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--cyan);background:#fff;}
-.f textarea{resize:vertical;min-height:60px;line-height:1.4;}
+.f { display: flex; flex-direction: column; gap: 2px; }
+.lbl { font-size: 7.5pt; font-weight: 700; color: #3d6a7a; text-transform: uppercase; letter-spacing: .6px; }
+.val { font-size: 11pt; font-weight: 500; color: #1a2e3d; border-bottom: 1.5px solid #d0e8f0; padding-bottom: 3px; min-height: 20px; }
 
 /* TRABAJOS */
-.trab{display:flex;gap:6px;align-items:center;}
-.trab-n{width:26px;height:26px;background:var(--navy);color:var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;flex-shrink:0;}
-.trab input{flex:1;background:var(--light);border:1.5px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:16px;color:var(--text);}
-.trab input:focus{outline:none;border-color:var(--cyan);background:#fff;}
+.trab { display: flex; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid #eef5f8; }
+.trab-n { width: 22px; height: 22px; background: #0f2138; color: #00b8d9; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 11pt; font-weight: 700; flex-shrink: 0; }
+.trab-v { font-size: 11pt; color: #1a2e3d; }
 
-/* MATERIALES */
-.mat-hdr{display:grid;grid-template-columns:1fr 52px 70px 70px;gap:4px;padding:5px 6px;background:#1a3352;border-radius:4px 4px 0 0;}
-.mat-hdr span{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--cyan);font-weight:600;text-align:right;}
-.mat-hdr span:first-child{text-align:left;}
-.mat-row{display:grid;grid-template-columns:1fr 52px 70px 70px;gap:4px;padding:3px 0;border-bottom:1px solid var(--border);}
-.mat-row input{background:var(--light);border:1.5px solid var(--border);border-radius:5px;padding:8px 6px;font-size:15px;font-family:'Barlow',sans-serif;color:var(--text);width:100%;text-align:right;}
-.mat-row input:first-child{text-align:left;}
-.mat-row input:focus{outline:none;border-color:var(--cyan);background:#fff;}
-.mat-row input[readonly]{background:#f0f7fa;color:var(--muted);}
-.mat-foot{display:grid;grid-template-columns:1fr 192px;gap:4px;padding:4px 0;}
-.mat-foot-lbl{font-size:12px;color:var(--muted);text-align:right;padding-right:6px;display:flex;align-items:center;justify-content:flex-end;}
-.mat-foot input{background:var(--light);border:1.5px solid var(--border);border-radius:5px;padding:5px 6px;font-size:13px;font-family:'Barlow',sans-serif;width:100%;text-align:right;}
-.mat-total{background:var(--navy);border-radius:0 0 4px 4px;padding:7px 8px;display:flex;justify-content:space-between;align-items:center;}
-.mat-total-lbl{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:#fff;font-weight:600;}
-.mat-total-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;color:var(--cyan);font-weight:700;}
+/* TABLE */
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl thead tr { background: #1a3352; }
+.tbl thead th { font-family: 'Barlow Condensed', sans-serif; font-size: 10pt; color: #00b8d9; padding: 6px 8px; font-weight: 600; text-align: right; }
+.tbl thead th:first-child { text-align: left; }
+.tbl tbody tr:nth-child(even) { background: #f5fbfd; }
+.tbl tbody td { font-size: 10.5pt; padding: 6px 8px; border-bottom: 1px solid #e8f2f6; text-align: right; }
+.tbl tbody td:first-child { text-align: left; }
+.tbl .sub td { background: #eef7fa; font-size: 9.5pt; color: #3d6a7a; padding: 4px 8px; }
+.tbl .tot td { background: #0f2138; font-family: 'Barlow Condensed', sans-serif; font-size: 15pt; font-weight: 700; padding: 8px 10px; color: #fff; }
+.tbl .tot td:last-child { color: #00b8d9; font-size: 17pt; }
 
 /* FOTOS */
-.foto-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.foto-item label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px dashed var(--border);border-radius:var(--r);padding:10px;cursor:pointer;transition:all .2s;min-height:80px;position:relative;}
-.foto-item label.taken{border-color:var(--green);background:rgba(0,200,120,.05);}
-.foto-item input[type=file]{display:none;}
-.foto-item-lbl{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
-.foto-item label.taken .foto-item-lbl{color:var(--green);}
-.foto-preview{width:100%;border-radius:6px;max-height:120px;object-fit:cover;margin-top:4px;display:none;}
-.foto-check-badge{position:absolute;top:5px;right:5px;background:var(--green);color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;display:none;align-items:center;justify-content:center;}
-.foto-item label.taken .foto-check-badge{display:flex;}
+.foto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.foto-box { border: 1.5px solid #cce0ea; border-radius: 5px; overflow: hidden; }
+.foto-lbl { background: #eef7fa; padding: 5px 10px; font-size: 9pt; font-weight: 700; color: #3d6a7a; text-transform: uppercase; letter-spacing: .5px; }
+.foto-area { height: 52mm; background: #f8fcfe; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; color: #aac8d4; }
+.foto-area-icon { font-size: 32pt; }
+.foto-area-txt { font-size: 9pt; text-align: center; }
 
-/* PAGO */
-.pago-row{display:flex;gap:8px;}
-.pago-opt{flex:1;border:2px solid var(--border);border-radius:var(--r);padding:10px 6px;text-align:center;cursor:pointer;font-size:15px;font-weight:600;color:#4a6a7a;transition:all .2s;}
-.pago-opt.sel{border-color:var(--cyan);background:rgba(0,184,217,.08);color:var(--cyan);}
-.pago-opt span{display:block;font-size:16px;margin-bottom:2px;}
+/* CIERRE */
+.pago-badge { display: inline-block; background: rgba(0,184,217,0.1); border: 1.5px solid #00b8d9; border-radius: 4px; padding: 3px 12px; font-size: 11pt; font-weight: 600; color: #00b8d9; }
 
-/* BOTTOM */
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:10px 12px;display:flex;gap:8px;box-shadow:0 -3px 12px rgba(0,0,0,.07);}
-.btn-clear{border:2px solid var(--border);background:none;border-radius:8px;padding:12px 16px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;}
-.btn-pdf{flex:1;background:var(--navy);border:none;border-radius:8px;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
-.btn-pdf:active{background:var(--cyan);}
+/* FIRMAS */
+.firma-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 10px; padding-top: 4px; }
+.firma-line { border-top: 1.5px solid #aac8d4; padding-top: 5px; font-size: 8.5pt; color: #4a7a90; text-align: center; margin-top: 20px; }
 
-/* PRINT */
-@media print{
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
-  body{background:#fff;font-size:11px;}
-  .hdr{position:static!important;}
-  .progress-bar,.bottom{display:none!important;}
-  .main{padding:6px;max-width:100%;}
-  .card{margin-bottom:6px;box-shadow:none;border:1px solid #ddd;page-break-inside:avoid;}
-  .f input,.f select,.f textarea,.trab input,.mat-row input,.mat-foot input{border:none!important;background:transparent!important;padding:1px 2px!important;font-size:11px!important;}
-  .mat-row input[readonly]{background:#f5f5f5!important;}
-  .foto-preview{display:block!important;max-height:100px;}
-  .pago-opt{border:1px solid #ddd!important;}
-  select{-webkit-appearance:none;border:none!important;background:transparent!important;}
-}
+/* FOOTER */
+.footer { background: #0f2138; padding: 6px 18px; display: flex; justify-content: space-between; }
+.footer-txt { font-size: 8pt; color: #3d6a7a; }
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="hdr">
-  <div>
-    <div class="hdr-brand">VÓRTICE <span>E&amp;C SAS</span></div>
-    <div class="hdr-sub">Refrigeración · Maquinaria Industrial · 311 667 6799</div>
-  </div>
-  <div class="hdr-ot">
-    <div class="hdr-ot-lbl">Orden No.</div>
-    <div class="hdr-ot-num" id="otDisplay">001</div>
-  </div>
-</div>
-<div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
-
-<div class="main">
-
-  <!-- INFO + CLIENTE -->
-  <div class="card">
-    <div class="card-head"><span class="card-head-icon">📋</span><span class="card-head-title">General y Cliente</span></div>
-    <div class="card-body">
-      <div class="g4">
-        <div class="f"><label>No. Orden</label><input id="otNum" value="001" oninput="document.getElementById('otDisplay').textContent=this.value||'001';prog()"></div>
-        <div class="f"><label>Fecha</label><input type="date" id="fecha" oninput="prog()"></div>
-        <div class="f"><label>Inicio</label><input type="time" id="horaInicio"></div>
-        <div class="f"><label>Fin</label><input type="time" id="horaFin"></div>
-      </div>
-      <div class="g2">
-        <div class="f"><label>Técnico</label><input id="tecnico" placeholder="Nombre" oninput="prog()"></div>
-        <div class="f"><label>Cliente / Empresa</label><input id="cliente" placeholder="Nombre o razón social" oninput="prog()"></div>
-      </div>
-      <div class="g2">
-        <div class="f"><label>Teléfono</label><input type="tel" id="telefono" placeholder="Cel / fijo"></div>
-        <div class="f"><label>Dirección</label><input id="direccion" placeholder="Dirección del servicio" oninput="prog()"></div>
-      </div>
+  <div class="hdr">
+    <div>
+      <div class="brand-name">VÓRTICE <span>E&C SAS</span></div>
+      <div class="brand-sub">Ingeniería en Refrigeración y Maquinaria Industrial</div>
+      <div class="brand-contact">vorticeasg@gmail.com &nbsp;|&nbsp; 311 667 6799 &nbsp;|&nbsp; Colombia</div>
+    </div>
+    <div class="ot-box">
+      <div class="ot-lbl">Orden No.</div>
+      <div class="ot-num">0346</div>
     </div>
   </div>
+  <div class="stripe"></div>
 
-  <!-- EQUIPO -->
-  <div class="card">
-    <div class="card-head"><span class="card-head-icon">❄️</span><span class="card-head-title">Equipo</span></div>
-    <div class="card-body">
-      <div class="g2">
-        <div class="f"><label>Tipo de equipo</label>
-          <select id="tipoEquipo" oninput="prog()">
-            <option value="">Seleccionar...</option>
-            <optgroup label="Refrigeración">
-              <option>Cuarto frío</option>
-              <option>Refrigerador comercial</option>
-              <option>Nevera de postres / vitrina</option>
-              <option>Congelador vertical</option>
-              <option>Congelador horizontal</option>
-              <option>Chiller industrial</option>
-              <option>Unidad condensadora</option>
-              <option>Compresor industrial</option>
-            </optgroup>
-            <optgroup label="Panadería y cocina">
-              <option>Horno industrial</option>
-              <option>Horno de convección</option>
-              <option>Horno de piso / panadero</option>
-              <option>Freidora industrial</option>
-              <option>Plancha industrial</option>
-              <option>Batidora industrial</option>
-              <option>Amasadora</option>
-              <option>Cámara de fermentación</option>
-              <option>Estufa industrial</option>
-            </optgroup>
-            <optgroup label="Climatización">
-              <option>Minisplit</option>
-              <option>Aire central</option>
-              <option>Extractor / ventilador</option>
-              <option>Torre de enfriamiento</option>
-            </optgroup>
-            <optgroup label="Otro">
-              <option>Otro equipo</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="f"><label>Marca / Modelo</label><input id="marcaModelo" placeholder="Ej: Tecumseh TH4"></div>
-      </div>
-      <div class="g2">
-        <div class="f"><label>Serial (opcional)</label><input id="serial" placeholder="S/N"></div>
-        <div class="f"><label>Ubicación</label><input id="ubicacion" placeholder="Ej: Cuarto trasero"></div>
-      </div>
-    </div>
-  </div>
+  <div class="body">
 
-  <!-- DIAGNÓSTICO Y TRABAJOS -->
-  <div class="card">
-    <div class="card-head"><span class="card-head-icon">🔧</span><span class="card-head-title">Diagnóstico y Trabajos</span></div>
-    <div class="card-body">
-      <div class="f"><label>Falla / motivo del servicio</label>
-        <textarea id="diagnostico" placeholder="Describe la falla o motivo del servicio..." oninput="prog()"></textarea>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;">
-        <div class="trab"><div class="trab-n">1</div><input id="t1" placeholder="Trabajo realizado..." oninput="prog()"></div>
-        <div class="trab"><div class="trab-n">2</div><input id="t2" placeholder="Trabajo realizado..."></div>
-        <div class="trab"><div class="trab-n">3</div><input id="t3" placeholder="Trabajo realizado..."></div>
-        <div class="trab"><div class="trab-n">4</div><input id="t4" placeholder="Opcional..."></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MATERIALES -->
-  <div class="card">
-    <div class="card-head"><span class="card-head-icon">🧰</span><span class="card-head-title">Materiales y Cobro</span></div>
-    <div class="card-body">
-      <div>
-        <div class="mat-hdr">
-          <span>Descripción</span><span>Cant.</span><span>V.Unit $</span><span>Total $</span>
+    <!-- GENERAL -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-hdr-title">📋 General y Cliente</span></div>
+      <div class="sec-body">
+        <div class="g4" style="margin-bottom:8px">
+          <div class="f"><div class="lbl">No. Orden</div><div class="val">0346</div></div>
+          <div class="f"><div class="lbl">Fecha</div><div class="val">22/05/2026</div></div>
+          <div class="f"><div class="lbl">Hora inicio</div><div class="val">08:00 a.m.</div></div>
+          <div class="f"><div class="lbl">Hora fin</div><div class="val">10:30 a.m.</div></div>
         </div>
-        <div id="matBody">
-          <div class="mat-row"><input placeholder="Material o repuesto"><input type="number" placeholder="1" min="0" oninput="calcMat()" style="text-align:right"><input type="number" placeholder="0" min="0" oninput="calcMat()" style="text-align:right"><input type="number" readonly style="text-align:right"></div>
-          <div class="mat-row"><input placeholder="Material o repuesto"><input type="number" placeholder="1" min="0" oninput="calcMat()" style="text-align:right"><input type="number" placeholder="0" min="0" oninput="calcMat()" style="text-align:right"><input type="number" readonly style="text-align:right"></div>
-          <div class="mat-row"><input placeholder="Material o repuesto"><input type="number" placeholder="1" min="0" oninput="calcMat()" style="text-align:right"><input type="number" placeholder="0" min="0" oninput="calcMat()" style="text-align:right"><input type="number" readonly style="text-align:right"></div>
+        <div class="g2" style="margin-bottom:8px">
+          <div class="f"><div class="lbl">Técnico</div><div class="val">Gabriel Salazar</div></div>
+          <div class="f"><div class="lbl">Cliente / Empresa</div><div class="val">Panadería El Trigal</div></div>
         </div>
-        <div class="mat-foot">
-          <div class="mat-foot-lbl">Mano de obra:</div>
-          <input type="number" id="manoObra" placeholder="0" min="0" oninput="calcMat()" style="text-align:right;background:#fff;border:1.5px solid var(--border);border-radius:5px;padding:5px 6px;font-size:13px;font-family:'Barlow',sans-serif;">
-        </div>
-        <div class="mat-total">
-          <span class="mat-total-lbl">TOTAL A COBRAR</span>
-          <span class="mat-total-val" id="totalFinal">$ 0</span>
+        <div class="g2">
+          <div class="f"><div class="lbl">Teléfono</div><div class="val">311 234 5678</div></div>
+          <div class="f"><div class="lbl">Dirección</div><div class="val">Cra 15 #42-30, Bogotá</div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- FOTOS + CIERRE -->
-  <div class="card">
-    <div class="card-head"><span class="card-head-icon">📷</span><span class="card-head-title">Fotos y Cierre</span></div>
-    <div class="card-body">
-      <div class="foto-grid">
-        <div class="foto-item">
-          <label id="lblBefore">
-            <div class="foto-check-badge">✓</div>
-            <input type="file" accept="image/*" id="inBefore" onchange="previewFoto(this,'prevBefore','lblBefore')">
-            <span style="font-size:22px">📸</span>
-            <span class="foto-item-lbl">Foto ANTES</span>
-            <img id="prevBefore" class="foto-preview">
-          </label>
+    <!-- EQUIPO -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-hdr-title">❄️ Equipo</span></div>
+      <div class="sec-body">
+        <div class="g2" style="margin-bottom:8px">
+          <div class="f"><div class="lbl">Tipo de equipo</div><div class="val">Cuarto frío</div></div>
+          <div class="f"><div class="lbl">Marca / Modelo</div><div class="val">Tecumseh TH4</div></div>
         </div>
-        <div class="foto-item">
-          <label id="lblAfter">
-            <div class="foto-check-badge">✓</div>
-            <input type="file" accept="image/*" id="inAfter" onchange="previewFoto(this,'prevAfter','lblAfter')">
-            <span style="font-size:22px">📸</span>
-            <span class="foto-item-lbl">Foto DESPUÉS</span>
-            <img id="prevAfter" class="foto-preview">
-          </label>
+        <div class="g2">
+          <div class="f"><div class="lbl">Serial</div><div class="val">SN-20489-B</div></div>
+          <div class="f"><div class="lbl">Ubicación</div><div class="val">Cuarto trasero, planta 1</div></div>
         </div>
-      </div>
-      <div>
-        <label style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:6px">Forma de Pago</label>
-        <div class="pago-row">
-          <div class="pago-opt sel" id="pEfectivo" onclick="selPago('Efectivo')"><span>💵</span>Efectivo</div>
-          <div class="pago-opt" id="pTransferencia" onclick="selPago('Transferencia')"><span>📱</span>Transf.</div>
-          <div class="pago-opt" id="pCredito" onclick="selPago('Credito')"><span>📄</span>Crédito</div>
-        </div>
-      </div>
-      <div class="g2">
-        <div class="f"><label>Garantía</label>
-          <select id="garantia">
-            <option>30 días mano de obra</option>
-            <option>60 días mano de obra</option>
-            <option>90 días mano de obra</option>
-            <option>Sin garantía</option>
-          </select>
-        </div>
-        <div class="f"><label>Próximo servicio</label>
-          <input id="proximoServicio" placeholder="Ej: 3 meses">
-        </div>
-      </div>
-      <div class="f"><label>Observaciones</label>
-        <textarea id="observaciones" placeholder="Recomendaciones al cliente..."></textarea>
       </div>
     </div>
+
+    <!-- DIAGNÓSTICO -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-hdr-title">🔧 Diagnóstico y Trabajos</span></div>
+      <div class="sec-body">
+        <div class="f" style="margin-bottom:8px">
+          <div class="lbl">Falla / motivo</div>
+          <div class="val">El equipo no enfría correctamente. Temperatura fuera de rango, ruido inusual en compresor.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div class="trab"><div class="trab-n">1</div><div class="trab-v">Diagnóstico general del sistema de refrigeración</div></div>
+          <div class="trab"><div class="trab-n">2</div><div class="trab-v">Recarga de gas refrigerante R-404A (500g)</div></div>
+          <div class="trab"><div class="trab-n">3</div><div class="trab-v">Limpieza de condensador y evaporador</div></div>
+          <div class="trab"><div class="trab-n">4</div><div class="trab-v">Revisión de válvula de expansión y sellado de fugas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATERIALES -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-hdr-title">🧰 Materiales y Cobro</span></div>
+      <div class="sec-body" style="padding:0">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th style="text-align:left;width:50%">Descripción</th>
+              <th style="width:10%">Cant.</th>
+              <th style="width:20%">V. Unit $</th>
+              <th style="width:20%">Total $</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Gas refrigerante R-404A</td><td>1</td><td>$ 85.000</td><td>$ 85.000</td></tr>
+            <tr><td>Sellador de fugas</td><td>1</td><td>$ 28.000</td><td>$ 28.000</td></tr>
+            <tr><td>Filtro deshidratador</td><td>1</td><td>$ 35.000</td><td>$ 35.000</td></tr>
+            <tr class="sub"><td colspan="3" style="text-align:right">Subtotal materiales:</td><td>$ 148.000</td></tr>
+            <tr class="sub"><td colspan="3" style="text-align:right">Mano de obra:</td><td>$ 180.000</td></tr>
+            <tr class="tot"><td colspan="3">TOTAL A COBRAR</td><td>$ 328.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOTOS Y CIERRE -->
+    <div class="sec">
+      <div class="sec-hdr"><span class="sec-hdr-title">📷 Fotos y Cierre</span></div>
+      <div class="sec-body">
+        <div class="foto-grid">
+          <div class="foto-box">
+            <div class="foto-lbl">📸 Foto ANTES</div>
+            <div class="foto-area">
+              <span class="foto-area-icon">🖼</span>
+              <span class="foto-area-txt">Foto del equipo<br>antes del servicio</span>
+            </div>
+          </div>
+          <div class="foto-box">
+            <div class="foto-lbl">📸 Foto DESPUÉS</div>
+            <div class="foto-area">
+              <span class="foto-area-icon">🖼</span>
+              <span class="foto-area-txt">Foto del equipo<br>después del servicio</span>
+            </div>
+          </div>
+        </div>
+        <div class="g3" style="margin-bottom:8px">
+          <div class="f"><div class="lbl">Forma de pago</div><div class="val"><span class="pago-badge">💵 Efectivo</span></div></div>
+          <div class="f"><div class="lbl">Garantía</div><div class="val">30 días mano de obra</div></div>
+          <div class="f"><div class="lbl">Próximo servicio</div><div class="val">Mantenimiento en 3 meses</div></div>
+        </div>
+        <div class="f">
+          <div class="lbl">Observaciones</div>
+          <div class="val">Se recomienda revisar el aislamiento del cuarto. Evitar sobrecargar el equipo con productos calientes.</div>
+        </div>
+        <div class="firma-row">
+          <div><div class="firma-line">Firma Técnico — Vórtice E&C SAS</div></div>
+          <div><div class="firma-line">Firma / Sello del Cliente</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-txt">vorticeasg@gmail.com &nbsp;|&nbsp; 311 667 6799 &nbsp;|&nbsp; Colombia</div>
+    <div class="footer-txt">Vórtice E&C SAS — OT No. 0346</div>
   </div>
 
 </div>
-
-<div class="bottom">
-  <button class="btn-clear" onclick="clearForm()">🗑</button>
-  <button class="btn-pdf" onclick="window.print()">⬇ Guardar PDF</button>
-</div>
-
-<script>
-document.getElementById('fecha').valueAsDate = new Date();
-let pagoSel = 'Efectivo';
-
-function selPago(p) {
-  pagoSel = p;
-  ['Efectivo','Transferencia','Credito'].forEach(t => document.getElementById('p'+t).classList.remove('sel'));
-  document.getElementById('p'+p).classList.add('sel');
-}
-
-function previewFoto(input, previewId, labelId) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById(previewId);
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById(labelId).classList.add('taken');
-  };
-  reader.readAsDataURL(file);
-}
-
-function calcMat() {
-  const rows = document.querySelectorAll('#matBody .mat-row');
-  let sub = 0;
-  rows.forEach(row => {
-    const inputs = row.querySelectorAll('input');
-    const c = parseFloat(inputs[1].value)||0;
-    const u = parseFloat(inputs[2].value)||0;
-    const t = c*u;
-    inputs[3].value = t>0 ? t : '';
-    sub += t;
-  });
-  const mano = parseFloat(document.getElementById('manoObra').value)||0;
-  document.getElementById('totalFinal').textContent = '$ ' + (sub+mano).toLocaleString('es-CO');
-}
-
-function prog() {
-  const ids = ['otNum','fecha','tecnico','cliente','direccion','tipoEquipo','diagnostico','t1'];
-  const filled = ids.filter(id => document.getElementById(id).value.trim()).length;
-  document.getElementById('pFill').style.width = Math.round(filled/ids.length*100)+'%';
-}
-
-function clearForm() {
-  if (!confirm('¿Limpiar todo?')) return;
-  document.querySelectorAll('input:not([readonly]),textarea,select').forEach(el => {
-    if (el.type==='date') el.valueAsDate=new Date();
-    else if (el.tagName==='SELECT') el.selectedIndex=0;
-    else el.value='';
-  });
-  ['prevBefore','prevAfter'].forEach(id => { const img=document.getElementById(id); img.src=''; img.style.display='none'; });
-  ['lblBefore','lblAfter'].forEach(id => document.getElementById(id).classList.remove('taken'));
-  selPago('Efectivo');
-  document.getElementById('totalFinal').textContent='$ 0';
-  document.getElementById('otDisplay').textContent='001';
-  prog();
-}
-
-prog();
-</script>
 </body>
-</html>
+                                                             </html>
